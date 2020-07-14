@@ -18,4 +18,5 @@ after_success:
   - docker push dodsheli/multi-client
   - docker push dodsheli/multi-nginx
   - docker push dodsheli/server
-  - docker push dodsheli/multi-worker 
+  - docker push dodsheli/multi-worker
+    #checkagain 

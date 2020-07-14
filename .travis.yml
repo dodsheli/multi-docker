@@ -1,0 +1,21 @@
+sudo: required
+services: 
+  - docker
+ 
+before_install: 
+  - docker build -t dodsheli/react-test:latest -f ./client/Dockerfile.dev ./client
+
+script: 
+  - docker run dodsheli/react-test npm test -- --coverage
+
+after_success: 
+  - docker build -t dodsheli/multi-client ./client
+  - docker build -t dodsheli/multi-nginx ./nginx
+  - docker build -t dodsheli/multi-server ./server 
+  - docker build -t dodsheli/multi-worker ./worker
+    #Take Those Images, Push Them To Docker Hub 
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push dodsheli/multi-client
+  - docker push dodsheli/multi-nginx
+  - docker push dodsheli/server
+  - docker push dodsheli/multi-worker 

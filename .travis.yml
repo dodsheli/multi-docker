@@ -14,9 +14,9 @@ after_success:
   - docker build -t dodsheli/multi-server ./server 
   - docker build -t dodsheli/multi-worker ./worker
     #Take Those Images, Push Them To Docker Hub 
-  - echo Eliadmalki123 | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push dodsheli/multi-client:latest
   - docker push dodsheli/multi-nginx:latest
   - docker push dodsheli/server:latest
   - docker push dodsheli/multi-worker:latest
-    #checkagain 
+    #checkagain #YEHA
